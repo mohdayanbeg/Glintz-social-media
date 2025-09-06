@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.routes.js"
 import userRouter from "./routes/user.routes.js"
 dotenv.config()
 
+connectDB()
 const app = express()
 app.use(cors({
     origin:"http://localhost:5173",
@@ -26,5 +27,4 @@ let port = process.env.PORT||5000
 
 app.listen(port,()=>{
     console.log(`server running on ${port}`)
-    connectDB()
 })

@@ -8,7 +8,8 @@ import axios from 'axios';
 import { serverUri } from '../App';
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../redux/userSlice';
 const SignUp = () => {
     const [profileImage, setProfileImage] = useState(dp);
     const[showPassword,setShowPassword]=useState(false)
@@ -20,6 +21,8 @@ const SignUp = () => {
     const[loading,setLoading]=useState("")
 
     const navigate=useNavigate()
+
+    const dispatch=useDispatch()
 
     // const handleFileChange = (e) => {
     //     const file = e.target.files[0];
@@ -37,8 +40,8 @@ const SignUp = () => {
         try {
             e.preventDefault()
             const result=await axios.post(`${serverUri}/api/auth/signup`,{name,userName,email,password},{withCredentials:true})
+            dispatch(setUserData(result.data))
             setLoading(false)
-            console.log(result.data);
             
         } catch (error) {
             console.log(error);
@@ -54,7 +57,7 @@ const SignUp = () => {
                 {/* left panel */}
                 <div className="w-full lg:w-[50%] h-full p-8 flex flex-col items-center justify-center space-y-6">
                     <h1 className="text-3xl font-bold text-gray-900">
-                                          Sign In to<img src={GlintTitle} alt="Glintz" className='h-[75px] inline-block filter invert' />
+                                          Sign Up to<img src={GlintTitle} alt="Glintz" className='h-[75px] inline-block filter invert' />
                                         </h1>
                     <p className="text-sm text-gray-600">Join our community today.</p>
                     {/* <div className="flex justify-center mt-4">

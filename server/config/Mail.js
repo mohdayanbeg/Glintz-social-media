@@ -8,8 +8,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: "glintz.network@gmail.com",
-    pass: "rfkd yzah kuci pgag",
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS,
   },
 })
 
@@ -23,10 +23,7 @@ const sendMail = async (to, otp) => {
             html: `
                 <p>Hello,</p>
                 <p>We received a request to reset the password for your account. Please use the following One-Time Password (OTP) to proceed:</p>
-                <h2 style="text-align: center; color: #DC2626; font-size: 24px;">${otp}</h2>
-                <p>This code is only valid for the next 5 minutes.</p>
-                <p>If you did not request a password reset, please disregard this email. Your password will remain unchanged.</p>
-                <p>Best regards,<br>The Glintz Team</p>
+                <h2 style="text-align: center; color: #DC2626; font-size: 24px;">${otp}</h2><p>This code is only valid for the next 5 minutes.</p><p>If you did not request a password reset, please disregard this email. Your password will remain unchanged.</p><p>Best regards,<br>The Glintz Team</p>
             `
         })
         console.log("OTP email sent successfully to", to);

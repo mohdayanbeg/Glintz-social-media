@@ -23,6 +23,15 @@ const userSchema=new mongoose.Schema({
         type:String,
 
     },
+    bio:{
+        type:String
+    },
+     profession:{
+        type:String
+    },
+    gender:{
+        type:String
+    },
     followers:[
         {
             type:mongoose.Schema.Types.ObjectId,

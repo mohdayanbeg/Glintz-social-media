@@ -8,19 +8,24 @@ import Home from './pages/Home'
 import { useSelector } from 'react-redux'
 import getCurrentUser from './hooks/getCurrentUser'
 import GetSuggestedUser from './hooks/GetSuggestedUser'
+import Profile from './pages/Profile'
+import EditProfile from './pages/editProfile'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
   
   getCurrentUser()
   GetSuggestedUser()
-  const {userData}=useSelector(state=>state.user)
+
+  const {userData, profileData}=useSelector(state=>state.user)
   return (
     <Routes>
       <Route path="/signup" element={!userData?<SignUp />:<Navigate to={"/"}/>} />
       <Route path="/signin" element={!userData?<SignIn />:<Navigate to={"/"}/>} />
       <Route path="/" element={userData?<Home />:<SignIn/>} />
       <Route path="/forgotpassword" element={!userData?<ForgotPassword />:<Navigate to={"/"}/>} />
+      <Route path='/profile/:userName' element={userData?<Profile/>:<Navigate to={"/signin"}/>}/>
+      <Route path='/editprofile' element={userData?<EditProfile/>:<Navigate to={"/signin"}/>}/>
     </Routes>
   )
 }

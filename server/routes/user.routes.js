@@ -1,11 +1,13 @@
 import express from "express"
 import loginSession from "../middlewares/loginSession.js"
-import { editProfile, getLoggedInUser, suggestedUsers } from "../controllers/user.controller.js"
+import { editProfile, getLoggedInUser, getProfile, suggestedUsers } from "../controllers/user.controller.js"
+import { upload } from "../middlewares/multer.js"
 
 const userRouter = express.Router()
 
 userRouter.get("/current",loginSession,getLoggedInUser)
 userRouter.get("/suggested",loginSession,suggestedUsers)
-userRouter.get("/editprofile",loginSession,editProfile)
+userRouter.get("/getProfile/:userName",loginSession,getProfile)
+userRouter.post("/editprofile",loginSession,upload.single("profileImage"),editProfile)
 
 export default userRouter 

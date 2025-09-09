@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import { serverUri } from '../App'
 import { setUserData } from '../redux/userSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { setPostData } from '../redux/postSlice'
 
 const getAllPost = () => {
 
 const dispatch=useDispatch()
+const {userData}=useSelector(state=>state.user)
+const {postData}=useSelector(state=>state.post)
 
   useEffect(()=>{
     const fetchPost= async ()=>{
@@ -23,7 +25,7 @@ const dispatch=useDispatch()
         }
     }
     fetchPost()
-  },[dispatch])
+  },[dispatch, userData, postData])
 }
 
 export default getAllPost

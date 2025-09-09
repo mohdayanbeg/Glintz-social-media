@@ -27,7 +27,7 @@ const postSchema = new mongoose.Schema({
             author:{type:mongoose.Schema.Types.ObjectId,
             ref:"User"},
             message:{
-                typr:String,
+                type:String,
             }
         }
     ]

@@ -8,7 +8,7 @@ const postRouter = express.Router()
 postRouter.post("/upload",loginSession,upload.single("media"),uploadPost)
 postRouter.get("/getAll",loginSession,getAllPosts)
 postRouter.get("/like/:postId",loginSession,like)
-postRouter.post("/saved/:postId",loginSession,saved)
+postRouter.get("/saved/:postId",loginSession,saved)
 postRouter.post("/comment/:postId",loginSession,comment)
 
 export default postRouter 

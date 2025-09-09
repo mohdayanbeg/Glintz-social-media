@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from "axios"
 import { Navigate, Route, Routes } from 'react-router-dom'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
 import ForgotPassword from './pages/ForgotPassword'
 import Home from './pages/Home'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import getCurrentUser from './hooks/getCurrentUser'
 import GetSuggestedUser from './hooks/GetSuggestedUser'
 import Profile from './pages/Profile'
 import EditProfile from './pages/editProfile'
 import Upload from './pages/Upload'
 import getAllPost from './hooks/getAllPost'
+import { setUserData } from './redux/userSlice'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {

@@ -124,7 +124,7 @@ const Profile = () => {
                         <button className='px-[10px] min-w-[150px] py-[5px] h-[40px] bg-[white] cursor-pointer rounded-2xl text-black' onClick={()=>{
                             dispatch(setSelectedUser(profileData))
                             navigate("/messageArea")
-                        }}>Message</button>
+                        }}>Follow</button>
                         <button className='px-[10px] min-w-[150px] py-[5px] h-[40px] bg-[white] cursor-pointer rounded-2xl text-black' onClick={()=>{
                             dispatch(setSelectedUser(profileData))
                             navigate("/messageArea")

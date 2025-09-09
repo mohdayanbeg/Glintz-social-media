@@ -1,3 +1,4 @@
+import uploadOnCloudinary from "../config/cloudinary.js";
 import Bitz from "../models/bitz.model.js";
 import User from "../models/user.model.js";
 
@@ -73,5 +74,16 @@ export const comment = async (req, res) => {
         return res.status(200).json(bitz)
     } catch (error) {
          return res.status(500).json({ message: `comment bitz error ${error}` })
+    }
+}
+
+
+export const getAllBitz=async (req,res)=>{
+    try {
+        const bitz=await Bitz.find({}).populate("author","name userName profileImage")
+        .populate("comments.author")
+        return res.status(200).json(bitz)
+    } catch (error) {
+        return res.status(500).json({message:`get all bitz error ${error}`})
     }
 }

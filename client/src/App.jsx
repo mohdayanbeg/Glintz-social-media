@@ -10,12 +10,15 @@ import getCurrentUser from './hooks/getCurrentUser'
 import GetSuggestedUser from './hooks/GetSuggestedUser'
 import Profile from './pages/Profile'
 import EditProfile from './pages/editProfile'
+import Upload from './pages/Upload'
+import getAllPost from './hooks/getAllPost'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
   
   getCurrentUser()
   GetSuggestedUser()
+  getAllPost()
 
   const {userData, profileData}=useSelector(state=>state.user)
   return (
@@ -26,6 +29,7 @@ const App = () => {
       <Route path="/forgotpassword" element={!userData?<ForgotPassword />:<Navigate to={"/"}/>} />
       <Route path='/profile/:userName' element={userData?<Profile/>:<Navigate to={"/signin"}/>}/>
       <Route path='/editprofile' element={userData?<EditProfile/>:<Navigate to={"/signin"}/>}/>
+      <Route path='/upload' element={userData?<Upload/>:<Navigate to={"/signin"}/>}/>
     </Routes>
   )
 }

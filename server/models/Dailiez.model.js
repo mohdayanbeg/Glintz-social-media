@@ -15,7 +15,7 @@ const dailiezSchema=new mongoose.Schema({
             type:String,
             required:true,
         },
-        views:{
+        viewers:{
             type:mongoose.Schema.Types.ObjectId,
             ref:"User",
         },

@@ -4,9 +4,14 @@ import dp from '../assets/dp.png'
 import { FaRegHeart } from "react-icons/fa";
 import DailiezCard from './DailiezDp';
 import Nav from './Nav';
+import { useSelector } from 'react-redux';
+import Post from './Post';
 
 
 const Feed = () => {
+
+  const {postData}=useSelector(state=>state.post)
+
   return (
     <div className='lg:w-[50%] w-full bg-black min-h-[100vh] lg:h-[100vh] relative lg:overflow-y-auto'>
       <div className="w-full h-[100px] flex items-center justify-between p-[20px] lg:hidden">
@@ -38,6 +43,10 @@ const Feed = () => {
           <div className="w-full relative min-h-[100vh] flex flex-col items-center gap-[20px] p-[10px] pt-[40px]  bg-white rounded-t-[60px] pb-120px]">
 
         <Nav/>
+
+        {postData && postData.map((post,index)=>(
+  <Post postData={post} key={index}/>))}
+
           </div>
 
 

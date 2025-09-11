@@ -4,18 +4,19 @@ import { setUserData } from '../redux/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { setPostData } from '../redux/postSlice'
+import { setBitzData } from '../redux/bitzSlice'
 
-const getAllPost = () => {
+const getAllBitz = () => {
 
 const dispatch=useDispatch()
 const {userData}=useSelector(state=>state.user)
 const {postData}=useSelector(state=>state.post)
 
   useEffect(()=>{
-    const fetchPost= async ()=>{
+    const fetchBitz= async ()=>{
         try {
-            const result= await axios.get(`${serverUri}/api/post/getall`,{withCredentials:true})
-            dispatch(setPostData(result.data))
+            const result= await axios.get(`${serverUri}/api/bitz/getall`,{withCredentials:true})
+            dispatch(setBitzData(result.data))
 
 
         } catch (error) {  
@@ -24,8 +25,8 @@ const {postData}=useSelector(state=>state.post)
             
         }
     }
-    fetchPost()
-  },[dispatch, userData])
+    fetchBitz()
+  },[dispatch, userData, postData])
 }
 
-export default getAllPost
+export default getAllBitz

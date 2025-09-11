@@ -3,18 +3,21 @@ import { serverUri } from '../App'
 import { useNavigate, useParams } from 'react-router-dom'
 import { setProfileData, setUserData } from '../redux/userSlice'
 import dp from "../assets/dp.png"
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import axios from "axios"
 import Nav from '../components/Nav'
 import FollowButton from '../components/FollowButton'
+import Post from '../components/Post.jsx'
 
 const Profile = () => {
     let { userName } = useParams()
     const dispatch = useDispatch()
     const { profileData, userData } = useSelector(state => state.user)
+    const { postData } = useSelector(state => state.post)
     let navigate = useNavigate()
+    const [postType, setPostType] = useState("allpost")
 
     const handleProfile = async () => {
         try {
@@ -73,7 +76,7 @@ const Profile = () => {
                         <div className='flex relative'>
                             {profileData?.followers?.slice(0, 3).map((user, index) => (
 
-                                <div key={index} className={`w-[40px] h-[40px]  border-2 border-black rounded-full cursor-pointer overflow-hidden ${index > 0 ? `absolute left-[${index *10 }px]` : ""}`}>
+                                <div key={index} className={`w-[40px] h-[40px]  border-2 border-black rounded-full cursor-pointer overflow-hidden ${index > 0 ? `absolute left-[${index * 9}px]` : ""}`}>
                                     <img src={user?.profileImage || dp} alt="" className='w-full object-cover' />
                                 </div>
                             ))}
@@ -95,7 +98,7 @@ const Profile = () => {
                             {profileData?.following?.slice(0, 3).map((user, index) => (
 
 
-                                <div key={index} className={`w-[40px] h-[40px]  border-2 border-black rounded-full cursor-pointer overflow-hidden ${index > 0 ? `absolute left-[${index * 10}px]` : ""}`}>
+                                <div key={index} className={`w-[40px] h-[40px]  border-2 border-black rounded-full cursor-pointer overflow-hidden ${index > 0 ? `absolute left-[${index * 9}px]` : ""}`}>
                                     <img src={user?.profileImage || dp} alt="" className='w-full object-cover' />
                                 </div>
                             ))}
@@ -135,10 +138,31 @@ const Profile = () => {
             <div className="w-full min-h-[100vh]  flex justify-center">
 
                 <div className='w-full max-w-[900px] flex flex-col items-center rounded-t-[30px] bg-white relative gap-[20px] pt-[30px] pb-[100px]'>
+                        {profileData?._id == userData._id &&
+                    <div className='w-[90%] max-w-[600px] h-[80px] bg-[white] rounded-full flex justify-around items-center gap-[10px]' >
+                    
+                        <div className={`${postType == "allpost" ? "bg-black text-white shadow-2xl shadow-black" : ""} text-black  w-[28%] h-[80%] flex justify-center items-center text-[19px] font-semibold hover:bg-black rounded-full hover:text-white cursor-pointer hover:shadow-2xl hover:shadow-black`} onClick={() => setPostType("allpost")}>Posts</div>
+                    
+                        <div className={`${postType == "savedpost" ? "bg-black text-white shadow-2xl shadow-black" : ""}text-black  w-[28%] h-[80%] flex justify-center items-center text-[19px] font-semibold hover:bg-black rounded-full hover:text-white cursor-pointer hover:shadow-2xl hover:shadow-black`} onClick={() => setPostType("savedpost")}>Saved Post</div>
 
-
+                    </div>}
 
                     <Nav />
+
+                    {profileData?._id == userData._id && <>{postType == 'allpost' &&
+                        postData.map((post, idx) => (
+                            post.author?._id == profileData?._id && <Post post={post} key={idx} />
+                        ))}
+                        {postType == 'savedpost' &&
+                            postData.map((post, idx) => (
+                                userData.saved.includes(post._id) && <Post post={post} key={idx} />
+                            ))}
+                    </>}
+                    {profileData?._id != userData._id &&
+                        postData.map((post, idx) => (
+                            post.author?._id == profileData?._id && <Post post={post} key={idx} />
+                        ))}
+
                 </div>
 
             </div>

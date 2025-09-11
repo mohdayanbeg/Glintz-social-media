@@ -120,7 +120,7 @@ const Upload = () => {
                 <div className={`${uploadType == "bitz" ? "bg-black text-white shadow-2xl shadow-black" : ""}text-black  w-[28%] h-[80%] flex justify-center items-center text-[19px] font-semibold hover:bg-black rounded-full hover:text-white cursor-pointer hover:shadow-2xl hover:shadow-black`} onClick={() => setUploadType("bitz")}>Bitz</div>
 
             </div>
-            <input type="file" hidden ref={mediaInput} onChange={handleMedia} />
+            <input type="file" hidden ref={mediaInput} accept={uploadType=="bitz"?"video/*":""} onChange={handleMedia} />
             {!frontendMedia && <div className='w-[80%] max-w-[500px] h-[250px] bg-[#0e1316] border-gray-800 border-2 flex flex-col items-center justify-center gap-[8px] mt-[15vh] rounded-2xl cursor-pointer hover:bg-[#353a3d]' onClick={() => mediaInput.current.click()} ><FiPlusSquare className='text-white cursor-pointer w-[25px] h-[25px]' />
                 <div className='text-white text-[19px] font-semibold'>Upload {uploadType}</div>
             </div>}

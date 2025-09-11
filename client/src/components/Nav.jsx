@@ -22,7 +22,7 @@ const Nav = () => {
             <div onClick={() => navigate("/")}><GoHomeFill className='text-white cursor-pointer w-[25px] h-[25px]' /></div>
             <div onClick={() => navigate("/search")}><FiSearch className='text-white cursor-pointer w-[25px] h-[25px]' /></div>
             <div onClick={() => navigate("/upload")}><FiPlusSquare className='text-white cursor-pointer w-[25px] h-[25px]' /></div>
-            <div onClick={() => navigate("/loops")}><LuClapperboard className='text-white cursor-pointer w-[28px] h-[28px]' /></div>
+            <div onClick={() => navigate("/bitz")}><LuClapperboard className='text-white cursor-pointer w-[28px] h-[28px]' /></div>
             <div className="w-[40px] h-[40px] border-2 border-black rounded-full cursor-pointer overflow-hidden" onClick={()=>{
                 navigate(`/profile/${userData.userName}`)
             }}>

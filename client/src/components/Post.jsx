@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dp from "../assets/dp.png"
 import { useNavigate } from 'react-router-dom'
 import { MdOutlineComment } from "react-icons/md";
-import { MdOutlineBookmarkBorder } from "react-icons/md";
+
 import { GoHeart } from "react-icons/go";
 import { GoHeartFill } from "react-icons/go";
 import VideoPlayer from './VideoPlayer'
 import { IoSendSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux'
 import { GoBookmarkFill } from "react-icons/go";
+import { GoBookmark } from "react-icons/go";
 import axios from 'axios';
 import { serverUri } from '../App';
 import { setPostData } from '../redux/postSlice';
 import { setUserData } from '../redux/userSlice';
 import FollowButton from './FollowButton';
+import getCurrentUser from '../hooks/getCurrentUser';
 const Post = ({ post }) => {
 
     const navigate = useNavigate()
@@ -51,10 +53,12 @@ const Post = ({ post }) => {
      }
 
 
-const handleSaved = async () => { 
+    const handleSaved = async () => { 
     try {
         const result = await axios.get(`${serverUri}/api/post/saved/${post._id}`,{ withCredentials: true })
             dispatch(setUserData(result.data))
+            
+           
     } catch (error) {
         console.log(error.response)
     }
@@ -104,8 +108,8 @@ return (
                 </div>
             </div>
             <div onClick={handleSaved}>
-                {!userData.saved.includes(post?._id) && <MdOutlineBookmarkBorder className='w-[25px] cursor-pointer h-[25px]' />}
-                {userData.saved.includes(post?._id) && <GoBookmarkFill className='w-[25px] cursor-pointer h-[25px]' />}
+                {!userData.saved.includes(post?._id) ?( <GoBookmark className='w-[25px] cursor-pointer h-[25px]' />)
+                : (<GoBookmarkFill className='w-[25px] cursor-pointer h-[25px]' />)}
             </div>
         </div>
 

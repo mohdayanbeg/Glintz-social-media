@@ -3,6 +3,7 @@ import { FiVolume2 } from "react-icons/fi";
 import { FiVolumeX } from "react-icons/fi";
 import dp from "../assets/dp.png"
 import FollowButton from './FollowButton';
+import { IoSendSharp } from "react-icons/io5";
 import { MdOutlineComment } from "react-icons/md";
 import { GoHeart } from "react-icons/go";
 import { GoHeartFill } from "react-icons/go";
@@ -60,17 +61,17 @@ const BitzCard = ({ bitz }) => {
   }
 
 
-  // const handleComment = async () => {
-  //   try {
-  //     const result = await axios.post(`${serverUri}/api/post/comment/${post._id}`, { message }, { withCredentials: true })
-  //     const updatedPost = result.data
-  //     const updatedPosts = postData.map(p => p._id == post._id ? updatedPost : p)
-  //     dispatch(setPostData(updatedPosts))
-  //     setMessage('')
-  //   } catch (error) {
+  const handleComment = async () => {
+    try {
+      const result = await axios.post(`${serverUri}/api/bitz/comment/${bitz._id}`, { message }, { withCredentials: true })
+      const updatedBitz = result.data
+      const updatedBitzs = bitzData.map(p => p._id == bitz._id ? updatedBitz : p)
+      dispatch(setBitzData(updatedBitzs))
+      setMessage('')
+    } catch (error) {
 
-  //   }
-  // }
+    }
+  }
 
   const handleLikeOnDoubleClick = () => {
     setShowHeart(true)

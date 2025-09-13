@@ -8,6 +8,6 @@ const bitzRouter = express.Router()
 bitzRouter.post("/upload",loginSession,upload.single("media"),uploadBitz)
 bitzRouter.get("/getAll",loginSession,getAllBitz)
 bitzRouter.get("/like/:bitzId",loginSession,like)
-bitzRouter.get("/comment",loginSession,comment)
+bitzRouter.post("/comment/:bitzId",loginSession,comment)
 
 export default bitzRouter 

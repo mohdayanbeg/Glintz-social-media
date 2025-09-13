@@ -69,8 +69,8 @@ export const comment = async (req, res) => {
             message
         })
         await bitz.save()
-        bitz.populate("author", "name userName profileImage")
-        bitz.populate("comments.author")
+        await bitz.populate("author", "name userName profileImage")
+        await bitz.populate("comments.author")
         return res.status(200).json(bitz)
     } catch (error) {
          return res.status(500).json({ message: `comment bitz error ${error}` })

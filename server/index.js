@@ -10,7 +10,6 @@ import bitzRouter from "./routes/bitz.routes.js"
 import dailiezRouter from "./routes/dailiez.routes.js"
 dotenv.config()
 
-connectDB()
 const app = express()
 app.use(cors({
     origin:"http://localhost:5173",
@@ -18,6 +17,8 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use(cookieParser())
+
+
 
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
@@ -32,5 +33,6 @@ let port = process.env.PORT||5000
 
 
 app.listen(port,()=>{
+    connectDB()
     console.log(`server running on ${port}`)
 })

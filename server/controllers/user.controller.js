@@ -18,7 +18,7 @@ export const getLoggedInUser = async (req, res) => {
 export const suggestedUsers = async (req, res) => {
     try {
         const users = await User.find({
-            _id: { $ne: req.userId }
+            _id: {$ne:req.userId }
         }).select("-password")
         return res.status(201).json(users)
     } catch (error) {

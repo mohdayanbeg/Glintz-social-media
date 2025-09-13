@@ -1,7 +1,12 @@
 import React, { useRef,useState,useEffect} from 'react'
 import { FiVolume2 } from "react-icons/fi";
 import { FiVolumeX } from "react-icons/fi";
-import {dp} from "../assets/dp.png"
+import dp from "../assets/dp.png"
+import FollowButton from './FollowButton';
+import { MdOutlineComment } from "react-icons/md";
+import { GoHeart } from "react-icons/go";
+import { GoHeartFill } from "react-icons/go";
+import { useSelector } from 'react-redux';
 const BitzCard = ({bitz}) => {
 
 
@@ -10,6 +15,7 @@ const BitzCard = ({bitz}) => {
 const [isMute,setIsMute]=useState(true)
 const [progress,setProgress]=useState(0)
 const videoRef=useRef()
+const {userData}=useSelector(state=>state.user)
 
 
  
@@ -55,11 +61,13 @@ const videoRef=useRef()
         setProgress(percent)
       }
     }
+const handleLike=()=>{
 
+}
 
   return (
     <div className='w-full lg:w-[480px] h-[100vh] flex items-center justify-center border-l-2 border-r-2 border-gray-800  relative'>
-       <video ref={videoRef} autoPlay muted={isMute} loop src={bitz?.media} onTimeUpdate={handleTimeUpdate} className='w-full max-h-full' onClick={handleClick}/>
+       <video ref={videoRef} autoPlay muted={isMute} src={bitz?.media} onTimeUpdate={handleTimeUpdate} className='w-full max-h-full' onClick={handleClick}/>
 
 
 
@@ -79,25 +87,25 @@ const videoRef=useRef()
           <div className='w-[30px] h-[30px] md:w-[40px] md:h-[40px] border-2 border-black rounded-full cursor-pointer overflow-hidden' >
             <img src={bitz.author?.profileImage || dp} alt="" className='w-full object-cover' />
           </div>
-          <div className='w-[120px] font-semibold truncate text-white '>{loop.author.userName}</div>
+          <div className='w-[120px] font-semibold truncate text-white '>{bitz.author.userName}</div>
        
-        <FollowButton targetUserId={loop.author?._id} tailwind={"px-[10px] py-[5px] text-white border-2 text-[14px] rounded-2xl border-white"}/>
+        <FollowButton targetUserId={bitz.author?._id} tailwind={"px-[10px] py-[5px] text-white border-2 text-[14px] rounded-2xl border-white"}/>
          </div>
          <div className='text-white px-[10px]'>
-            {loop.caption}
+            {bitz.caption}
          </div>
 
          <div className='absolute right-0 flex flex-col gap-[20px] text-white  bottom-[150px] justify-center px-[10px] '>
 <div className='flex flex-col items-center cursor-pointer'>
     <div onClick={handleLike}>
-        {!loop.likes.includes(userData._id) && <GoHeart className='w-[25px] cursor-pointer h-[25px]'/>}
-                   {loop.likes.includes(userData._id) && <GoHeartFill className='w-[25px] cursor-pointer h-[25px] text-red-600' />} 
+        {!bitz.likes.includes(userData._id) && <GoHeart className='w-[25px] cursor-pointer h-[25px]'/>}
+                   {bitz.likes.includes(userData._id) && <GoHeartFill className='w-[25px] cursor-pointer h-[25px] text-red-600' />} 
     </div>
-    <div >{loop.likes.length}</div>
+    <div >{bitz.likes.length}</div>
 </div>
 <div className='flex flex-col items-center cursor-pointer' onClick={()=>setShowComment(true)}>
     <div><MdOutlineComment className='w-[25px] cursor-pointer h-[25px]'/></div>
-    <div>{loop.comments.length}</div>
+    <div>{bitz.comments.length}</div>
 </div>
 
          </div>

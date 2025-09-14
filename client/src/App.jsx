@@ -17,10 +17,11 @@ import Bitz from './pages/Bitz'
 import getAllBitz from './hooks/getAllBitz'
 import Dailiez from './pages/Dailiez'
 import getAllDailiez from './hooks/getAllDailiez'
+import Message from './pages/Message'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
-  
+
   getCurrentUser()
   GetSuggestedUser()
   getAllPost()
@@ -28,19 +29,20 @@ const App = () => {
   getAllDailiez()
 
 
-  
-  const {userData, profileData}=useSelector(state=>state.user)
+
+  const { userData, profileData } = useSelector(state => state.user)
   return (
     <Routes>
-      <Route path="/signup" element={!userData?<SignUp />:<Navigate to={"/"}/>} />
-      <Route path="/signin" element={!userData?<SignIn />:<Navigate to={"/"}/>} />
-      <Route path="/" element={userData?<Home />:<SignIn/>} />
-      <Route path="/forgotpassword" element={!userData?<ForgotPassword />:<Navigate to={"/"}/>} />
-      <Route path='/profile/:userName' element={userData?<Profile/>:<Navigate to={"/signin"}/>}/>
-      <Route path='/dailiez/:userName' element={userData?<Dailiez/>:<Navigate to={"/signin"}/>}/>
-      <Route path='/editprofile' element={userData?<EditProfile/>:<Navigate to={"/signin"}/>}/>
-      <Route path='/upload' element={userData?<Upload/>:<Navigate to={"/signin"}/>}/>
-      <Route path='/bitz' element={userData?<Bitz/>:<Navigate to={"/signin"}/>}/>
+      <Route path="/signup" element={!userData ? <SignUp /> : <Navigate to={"/"} />} />
+      <Route path="/signin" element={!userData ? <SignIn /> : <Navigate to={"/"} />} />
+      <Route path="/" element={userData ? <Home /> : <SignIn />} />
+      <Route path="/forgotpassword" element={!userData ? <ForgotPassword /> : <Navigate to={"/"} />} />
+      <Route path='/profile/:userName' element={userData ? <Profile /> : <Navigate to={"/signin"} />} />
+      <Route path='/dailiez/:userName' element={userData ? <Dailiez /> : <Navigate to={"/signin"} />} />
+      <Route path='/editprofile' element={userData ? <EditProfile /> : <Navigate to={"/signin"} />} />
+      <Route path='/messages' element={userData ? <Message /> : <Navigate to={"/signin"} />} />
+      <Route path='/upload' element={userData ? <Upload /> : <Navigate to={"/signin"} />} />
+      <Route path='/bitz' element={userData ? <Bitz /> : <Navigate to={"/signin"} />} />
     </Routes>
   )
 }

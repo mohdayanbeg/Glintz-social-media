@@ -3,6 +3,7 @@ import logo from '../assets/title.png'
 import dp from '../assets/dp.png'
 import DailiezDp from './DailiezDp'
 import { FaRegHeart } from "react-icons/fa";
+import { BiMessageAltDetail } from "react-icons/bi";
 import Nav from './Nav';
 import { useSelector } from 'react-redux';
 import Post from './Post';
@@ -22,6 +23,7 @@ const Feed = () => {
               <img src={logo} alt="" className='w-[100px]' />
               <div className="">
                 <FaRegHeart className='w-[25px] h-[25px]' />
+                <BiMessageAltDetail className='text-[white] w-[25px] h-[25px]' onClick={()=>navigate("/messages")}/>
               </div>
             </div>
 

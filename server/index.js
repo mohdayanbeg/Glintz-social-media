@@ -8,6 +8,7 @@ import userRouter from "./routes/user.routes.js"
 import postRouter from "./routes/post.routes.js"
 import bitzRouter from "./routes/bitz.routes.js"
 import dailiezRouter from "./routes/dailiez.routes.js"
+import messageRouter from "./routes/message.routes.js"
 dotenv.config()
 
 const app = express()
@@ -25,6 +26,7 @@ app.use("/api/user",userRouter)
 app.use("/api/post",postRouter)
 app.use("/api/bitz",bitzRouter)
 app.use("/api/dailiez",dailiezRouter)
+app.use("/api/message",messageRouter)
 
 let port = process.env.PORT||5000
 

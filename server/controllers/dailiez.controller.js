@@ -42,7 +42,11 @@ export const viewDailiez = async (req, res) => {
 
         const viewersIds = dailiez.viewers.map(id => id.toString())
         if (!viewersIds.includes(req.userId.toString())) {
+            // console.log("1st",dailiez);
+            
             dailiez.viewers.push(req.userId)
+            // console.log("2nd",dailiez);
+            
             await dailiez.save()
         }
         const populatedDailiez = await Dailiez.findById(dailiez._id).populate("author", "name userName profileImage").populate("viewers", "name userName profileImage")

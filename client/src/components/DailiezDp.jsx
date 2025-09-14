@@ -1,24 +1,47 @@
 import React from 'react'
 import dp from "../assets/dp.png"
 import { FiPlusCircle } from "react-icons/fi";
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { FaHandLizard } from 'react-icons/fa';
+import { serverUri } from '../App';
+import axios from 'axios';
+import { setDailiezData } from '../redux/dailiezSlice';
 const DailiezDp = ({ ProfileImage, userName, dailiez }) => {
-  const navigate=useNavigate()
-  let { userData } = useSelector(state => state.user)
 
+
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const { userData } = useSelector(state => state.user)
+  const {dailiezData,allDailiezList}=useSelector(state=>state.dailiez)
+
+
+
+  const handleViewers=async (dailiezId)=>{
+  try {
+    const result=await axios.get(`${serverUri}/api/dailiez/view/${dailiezId}`,{withCredentials:true})
+
+    dispatch(setDailiezData(result.data))
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
   const handleClick=()=>{
   if(dailiez=='' && userName=="Your Dailiez"){
     navigate("/upload")
-  }else if(dailiez!='' && userName=="Your Dailiez"){
-      // handleViewers()
+  }else if(dailiez!='' && userName=="Your Dailiez"){  
+      handleViewers(dailiez[0]._id)
+      // console.log(dailiez)
+      
     navigate(`/dailiez/${userData?.userName}`)
  
   }else {
-    //  handleViewers()
+    console.log(dailiez._id);
+    
+     handleViewers(dailiez._id)
 navigate(`/dailiez/${userName}`)
   }
 }

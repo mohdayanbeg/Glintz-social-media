@@ -15,6 +15,8 @@ import getAllPost from './hooks/getAllPost'
 import { setUserData } from './redux/userSlice'
 import Bitz from './pages/Bitz'
 import getAllBitz from './hooks/getAllBitz'
+import Dailiez from './pages/Dailiez'
+import getAllDailiez from './hooks/getAllDailiez'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
@@ -23,6 +25,10 @@ const App = () => {
   GetSuggestedUser()
   getAllPost()
   getAllBitz()
+  getAllDailiez()
+
+
+  
   const {userData, profileData}=useSelector(state=>state.user)
   return (
     <Routes>
@@ -31,6 +37,7 @@ const App = () => {
       <Route path="/" element={userData?<Home />:<SignIn/>} />
       <Route path="/forgotpassword" element={!userData?<ForgotPassword />:<Navigate to={"/"}/>} />
       <Route path='/profile/:userName' element={userData?<Profile/>:<Navigate to={"/signin"}/>}/>
+      <Route path='/dailiez/:userName' element={userData?<Dailiez/>:<Navigate to={"/signin"}/>}/>
       <Route path='/editprofile' element={userData?<EditProfile/>:<Navigate to={"/signin"}/>}/>
       <Route path='/upload' element={userData?<Upload/>:<Navigate to={"/signin"}/>}/>
       <Route path='/bitz' element={userData?<Bitz/>:<Navigate to={"/signin"}/>}/>

@@ -7,9 +7,11 @@ import axios from 'axios';
 import { serverUri } from '../App.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPostData } from '../redux/postSlice.js';
-import { setDailiezData } from '../redux/dailiezSlice.js';
+import { setCurrentUserDailiez, setDailiezData } from '../redux/dailiezSlice.js';
 import { setBitzData } from '../redux/bitzSlice.js';
 import { ClipLoader } from 'react-spinners';
+import { setUserData } from '../redux/userSlice.js';
+import getCurrentUser from '../hooks/getCurrentUser.jsx';
 
 
 
@@ -66,7 +68,7 @@ const Upload = () => {
             formData.append("mediaType", mediaType)
             formData.append("media", backendMedia)
             const result = await axios.post(`${serverUri}/api/dailiez/upload`, formData, { withCredentials: true })
-               dispatch(setDailiezData(result.data))
+               dispatch(setCurrentUserDailiez(result.data))
                  setLoading(false)
                navigate("/")
             // console.log(result);

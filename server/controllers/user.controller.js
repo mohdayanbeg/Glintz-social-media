@@ -6,7 +6,7 @@ import User from "../models/user.model.js"
 export const getLoggedInUser = async (req, res) => {
     try {
         const userId = req.userId
-        const user = await User.findById(userId).populate("posts bitz posts.author posts.comments following")
+        const user = await User.findById(userId).populate("posts bitz posts.author posts.comments")
         if (!user) { return res.status(400).json({ message: "user not found" }) }
         return res.status(200).json(user);
     } catch (error) {

@@ -1,8 +1,8 @@
 import React from 'react'
 import logo from '../assets/title.png'
 import dp from '../assets/dp.png'
+import DailiezDp from './DailiezDp'
 import { FaRegHeart } from "react-icons/fa";
-import DailiezCard from './DailiezDp';
 import Nav from './Nav';
 import { useSelector } from 'react-redux';
 import Post from './Post';
@@ -10,7 +10,11 @@ import Post from './Post';
 
 const Feed = () => {
 
+  const {userData}=useSelector(state=>state.user)
   const {postData}=useSelector(state=>state.post)
+  const {allDailiezList,currentUserDailiez}=useSelector(state=>state.dailiez)
+
+  
 
   return (
     <div className='lg:w-[50%] w-full bg-black min-h-[100vh] lg:h-[100vh] relative lg:overflow-y-auto'>
@@ -23,20 +27,16 @@ const Feed = () => {
 
 
             <div className="flex w-full overflow-auto gap-[20px] items-center p-[10px]">
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              <DailiezCard userName={"userName"}/>
-              
+              <DailiezDp userName={"Your Dailiez"} ProfileImage={userData.profileImage||dp} dailiez={currentUserDailiez}/>
+
+
+              {allDailiezList?.map((dailiez,idx)=>(
+                <DailiezDp userName={dailiez.author.userName} ProfileImage={dailiez.author.profileImage||dp} dailiez={dailiez} key={idx}/>
+              ))}
+
+
+
+
             </div>
       
 

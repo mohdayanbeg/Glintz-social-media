@@ -1,9 +1,16 @@
 import React from 'react'
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Message = () => {
+
+    const navigate=useNavigate()
+
+
+
+
     return (
         <div className='w-full min-h-[100vh] flex flex-col bg-black gap-[20px] p-[10px]'>
             <div className='w-full h-[80px]  flex items-center gap-[20px] px-[20px]'>

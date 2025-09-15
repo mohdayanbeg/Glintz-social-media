@@ -7,6 +7,7 @@ import { BiMessageAltDetail } from "react-icons/bi";
 import Nav from './Nav';
 import { useSelector } from 'react-redux';
 import Post from './Post';
+import { useNavigate } from 'react-router-dom';
 
 
 const Feed = () => {
@@ -14,6 +15,7 @@ const Feed = () => {
   const {userData}=useSelector(state=>state.user)
   const {postData}=useSelector(state=>state.post)
   const {allDailiezList,currentUserDailiez}=useSelector(state=>state.dailiez)
+  const navigate=useNavigate()
 
   
 
@@ -21,8 +23,10 @@ const Feed = () => {
     <div className='lg:w-[50%] w-full bg-black min-h-[100vh] lg:h-[100vh] relative lg:overflow-y-auto'>
       <div className="w-full h-[100px] flex items-center justify-between p-[20px] lg:hidden">
               <img src={logo} alt="" className='w-[100px]' />
-              <div className="">
-                <FaRegHeart className='w-[25px] h-[25px]' />
+              <div className="flex items-center gap-[10px]">
+                <div className='relative' onClick={()=>navigate("/notifications")}>
+                  <FaRegHeart className='w-[25px] h-[25px]' />
+                </div>
                 <BiMessageAltDetail className='text-[white] w-[25px] h-[25px]' onClick={()=>navigate("/messages")}/>
               </div>
             </div>

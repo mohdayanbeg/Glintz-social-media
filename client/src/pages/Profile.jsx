@@ -10,6 +10,7 @@ import axios from "axios"
 import Nav from '../components/Nav'
 import FollowButton from '../components/FollowButton'
 import Post from '../components/Post.jsx'
+import { setSelectedUser } from '../redux/messageSlice.js'
 
 const Profile = () => {
     let { userName } = useParams()

@@ -18,6 +18,7 @@ import getAllBitz from './hooks/getAllBitz'
 import Dailiez from './pages/Dailiez'
 import getAllDailiez from './hooks/getAllDailiez'
 import Message from './pages/Message'
+import MessageArea from './pages/MessageArea'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
       <Route path='/dailiez/:userName' element={userData ? <Dailiez /> : <Navigate to={"/signin"} />} />
       <Route path='/editprofile' element={userData ? <EditProfile /> : <Navigate to={"/signin"} />} />
       <Route path='/messages' element={userData ? <Message /> : <Navigate to={"/signin"} />} />
+      <Route path='/messageArea' element={userData ? <MessageArea/> : <Navigate to={"/signin"} />} />
       <Route path='/upload' element={userData ? <Upload /> : <Navigate to={"/signin"} />} />
       <Route path='/bitz' element={userData ? <Bitz /> : <Navigate to={"/signin"} />} />
     </Routes>

@@ -21,7 +21,7 @@ const fetchDailiez= async ()=>{
     }
 }
 fetchDailiez()
-  },[userData,dailiezData,allDailiezList])
+  },[userData,dailiezData])
 }
 
 export default getAllDailiez

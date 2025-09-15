@@ -8,6 +8,10 @@ import { IoMdSend } from "react-icons/io";
 import dp from "../assets/dp.png"
 import SenderMessage from '../components/SenderMessage';
 import ReceiverMessage from '../components/ReceiverMessage';
+import axios from 'axios';
+import { serverUri } from '../App';
+import { Socket } from 'socket.io-client';
+
 
 
 
@@ -16,7 +20,7 @@ const MessageArea = () => {
 
     const { selectedUser, messages } = useSelector(state => state.message)
     const { userData } = useSelector(state => state.user)
-    //    const {socket}=useSelector(state=>state.socket)
+       const {socket}=useSelector(state=>state.socket)
     const navigate = useNavigate()
     const [input, setInput] = useState("")
     const dispatch = useDispatch()
@@ -42,7 +46,7 @@ const MessageArea = () => {
             if (backendImage) {
                 formData.append("image", backendImage)
             }
-            const result = await axios.post(`${serverUrl}/api/message/send/${selectedUser._id}`, formData, { withCredentials: true })
+            const result = await axios.post(`${serverUri}/api/message/send/${selectedUser._id}`, formData, { withCredentials: true })
             dispatch(setMessages([...messages, result.data]))
             setInput("")
             setBackendImage(null)
@@ -55,7 +59,7 @@ const MessageArea = () => {
 
     const getAllMessages = async () => {
         try {
-            const result = await axios.get(`${serverUrl}/api/message/getAll/${selectedUser._id}`, { withCredentials: true })
+            const result = await axios.get(`${serverUri}/api/message/getAll/${selectedUser._id}`, { withCredentials: true })
             dispatch(setMessages(result.data))
         } catch (error) {
             console.log(error)
@@ -68,12 +72,12 @@ const MessageArea = () => {
         getAllMessages()
     }, [])
 
-    // useEffect(()=>{
-    // socket?.on("newMessage",(mess)=>{
-    //   dispatch(setMessages([...messages,mess]))
-    // })
-    // return ()=>socket?.off("newMessage")
-    // },[messages,setMessages])
+    useEffect(()=>{
+    socket?.on("newMessage",(mess)=>{
+      dispatch(setMessages([...messages,mess]))
+    })
+    return ()=>socket?.off("newMessage")
+    },[messages,setMessages])
 
 
 
@@ -102,7 +106,7 @@ const MessageArea = () => {
 
             <div className='w-full h-[80%] pt-[100px]  px-[40px] flex flex-col gap-[50px] overflow-auto bg-black'>
                     {messages && messages?.map((mess,index)=>
-  mess.sender==userData._id?<SenderMessage message={mess}/>:<ReceiverMessage message={mess}/>
+  mess.sender==userData._id?<SenderMessage message={mess} key={index}/>:<ReceiverMessage message={mess} key={index}/>
 )}
              </div>
 

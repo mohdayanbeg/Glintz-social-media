@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv"
 dotenv.config()
 
-export const connectDB= async ()=>{
+
+const connectDB= async ()=>{
     try {
         await mongoose.connect(process.env.MONGODB_URI)
         console.log("database connected")
@@ -10,3 +11,5 @@ export const connectDB= async ()=>{
         res.status(401).send("message: ",error)
     }
 }
+
+export default connectDB

@@ -17,7 +17,6 @@ const getCurrentUser = () => {
 
 
         dispatch(setUserData(result.data))
-        dispatch(setFollowing(result.data.following))
         dispatch(setCurrentUserDailiez(result.data.dailiez))
 
 

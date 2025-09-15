@@ -1,6 +1,6 @@
 import express, { json } from "express"
 import dotenv from "dotenv"
-import { connectDB } from "./config/db.js"
+import  connectDB  from "./config/db.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import authRouter from "./routes/auth.routes.js"
@@ -9,9 +9,12 @@ import postRouter from "./routes/post.routes.js"
 import bitzRouter from "./routes/bitz.routes.js"
 import dailiezRouter from "./routes/dailiez.routes.js"
 import messageRouter from "./routes/message.routes.js"
+import { app, server } from "./socket.js"
+
 dotenv.config()
 
-const app = express()
+let port = process.env.PORT||5000
+
 app.use(cors({
     origin:"http://localhost:5173",
     credentials:true
@@ -28,13 +31,12 @@ app.use("/api/bitz",bitzRouter)
 app.use("/api/dailiez",dailiezRouter)
 app.use("/api/message",messageRouter)
 
-let port = process.env.PORT||5000
 
 
 
 
 
-app.listen(port,()=>{
+server.listen(port,()=>{
     connectDB()
     console.log(`server running on ${port}`)
 })

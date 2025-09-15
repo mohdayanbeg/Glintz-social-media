@@ -23,6 +23,7 @@ import {io} from "socket.io-client"
 import { setOnlineUsers, setSocket } from './redux/socketSlice.js'
 import getFollowingList from './hooks/getFollowingList.jsx'
 import getPrevChatUsers from './hooks/getPrevChatUsers.jsx'
+import Search from './pages/Search.jsx'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
@@ -85,6 +86,7 @@ const App = () => {
       <Route path='/messages' element={userData ? <Message /> : <Navigate to={"/signin"} />} />
       <Route path='/messageArea' element={userData ? <MessageArea /> : <Navigate to={"/signin"} />} />
       <Route path='/upload' element={userData ? <Upload /> : <Navigate to={"/signin"} />} />
+       <Route path='/search' element={userData?<Search/>:<Navigate to={"/signin"}/>}/>
       <Route path='/bitz' element={userData ? <Bitz /> : <Navigate to={"/signin"} />} />
     </Routes>
   )

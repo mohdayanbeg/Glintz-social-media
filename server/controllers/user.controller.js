@@ -143,3 +143,26 @@ export const followingList=async (req,res)=>{
      return res.status(500).json({message:`following error ${error}`})
   }
 }
+
+
+export const search=async (req,res)=>{
+  try {
+    const keyWord=req.query.keyWord
+
+    if(!keyWord){
+      return res.status(400).json({message:"keyword is required"})
+    }
+
+    const users=await User.find({
+      $or:[
+        {userName:{$regex:keyWord,$options:"i"}},
+        {name:{$regex:keyWord,$options:"i"}}
+      ]
+    }).select("-password")
+
+    return res.status(200).json(users)
+
+  } catch (error) {
+    return res.status(500).json({message:`search error ${error}`})
+  }
+}

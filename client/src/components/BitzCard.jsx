@@ -11,10 +11,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setBitzData } from '../redux/bitzSlice';
 import axios from 'axios';
 import { serverUri } from '../App';
+import { Socket } from 'socket.io-client';
 const BitzCard = ({ bitz }) => {
 
   const { bitzData } = useSelector(state => state.bitz)
   const { userData } = useSelector(state => state.user)
+  const { socket } = useSelector(state => state.socket)
 
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMute, setIsMute] = useState(true)
@@ -119,6 +121,19 @@ if(showComment){
   }, [])
 
 
+ useEffect(()=>{
+    socket?.on("likedBitz",(updatedData)=>{
+     const updatedBitzs=bitzData.map(p=>p._id==updatedData.bitzId?{...p,likes:updatedData.likes}:p)
+     dispatch(setBitzData(updatedBitzs))
+    })
+socket?.on("commentedBitz",(updatedData)=>{
+     const updatedBitzs=bitzData.map(p=>p._id==updatedData.bitzId?{...p,comments:updatedData.comments}:p)
+     dispatch(setBitzData(updatedBitzs))
+    })
+
+    return ()=>{socket?.off("likedBitz")
+               socket?.off("commentedBitz")}
+  },[socket,bitzData,dispatch])
 
 
   return (

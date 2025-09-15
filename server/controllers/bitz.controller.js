@@ -1,6 +1,7 @@
 import uploadOnCloudinary from "../config/cloudinary.js";
 import Bitz from "../models/bitz.model.js";
 import User from "../models/user.model.js";
+import { io } from "../socket.js";
 
 
 
@@ -47,6 +48,12 @@ export const like = async (req, res) => {
         }
         await bitz.save()
         await bitz.populate("author", "name userName profileImage")
+
+         io.emit("likedBitz",{
+            bitzId:bitz._id,
+            likes:bitz.likes
+        })
+
         return res.status(200).json(bitz)
     } catch (error) {
          return res.status(500).json({ message: `likebitz error ${error}` })
@@ -71,6 +78,12 @@ export const comment = async (req, res) => {
         await bitz.save()
         await bitz.populate("author", "name userName profileImage")
         await bitz.populate("comments.author")
+
+        io.emit("commentedBitz",{
+            bitzId:bitz._id,
+            comments:bitz.comments
+        })
+
         return res.status(200).json(bitz)
     } catch (error) {
          return res.status(500).json({ message: `comment bitz error ${error}` })

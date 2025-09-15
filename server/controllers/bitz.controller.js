@@ -1,5 +1,6 @@
 import uploadOnCloudinary from "../config/cloudinary.js";
 import Bitz from "../models/bitz.model.js";
+import Notification from "../models/notification.model.js";
 import User from "../models/user.model.js";
 import { io } from "../socket.js";
 
@@ -45,6 +46,22 @@ export const like = async (req, res) => {
             bitz.likes = bitz.likes.filter(id => id.toString() != req.userId.toString())
         }else{
             bitz.likes.push(req.userId)
+
+            if (bitz.author._id != req.userId) {
+                const notification = await Notification.create({
+                    sender: req.userId,
+                    receiver: bitz.author._id,
+                    type: "like",
+                    bitz: bitz._id,
+                    message: "liked your bitz"
+                })
+                const populatedNotification = await Notification.findById(notification._id).populate("sender receiver bitz")
+                const receiverSocketId = getSocketId(bitz.author._id)
+                if (receiverSocketId) {
+                    io.to(receiverSocketId).emit("newNotification", populatedNotification)
+                }
+
+            }
         }
         await bitz.save()
         await bitz.populate("author", "name userName profileImage")
@@ -75,6 +92,23 @@ export const comment = async (req, res) => {
             author:req.userId,
             message
         })
+
+        if (bitz.author._id != req.userId) {
+            const notification = await Notification.create({
+                sender: req.userId,
+                receiver: bitz.author._id,
+                type: "comment",
+                bitz: bitz._id,
+                message: "commented on your bitz"
+            })
+            const populatedNotification = await Notification.findById(notification._id).populate("sender receiver bitz")
+            const receiverSocketId = getSocketId(bitz.author._id)
+            if (receiverSocketId) {
+                io.to(receiverSocketId).emit("newNotification", populatedNotification)
+            }
+
+        }
+
         await bitz.save()
         await bitz.populate("author", "name userName profileImage")
         await bitz.populate("comments.author")

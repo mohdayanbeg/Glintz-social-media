@@ -14,6 +14,8 @@ const Feed = () => {
 
   const {userData}=useSelector(state=>state.user)
   const {postData}=useSelector(state=>state.post)
+  
+const {notificationData}=useSelector(state=>state.user)
   const {allDailiezList,currentUserDailiez}=useSelector(state=>state.dailiez)
   const navigate=useNavigate()
 
@@ -25,7 +27,8 @@ const Feed = () => {
               <img src={logo} alt="" className='w-[100px]' />
               <div className="flex items-center gap-[10px]">
                 <div className='relative' onClick={()=>navigate("/notifications")}>
-                  <FaRegHeart className='w-[25px] h-[25px]' />
+                 <FaRegHeart className='text-[white] w-[25px] h-[25px]' />
+                           {notificationData?.length > 0 && notificationData.some((noti) => noti.isRead === false) && (<div className='w-[10px] h-[10px] bg-blue-600 rounded-full absolute top-0 right-[-5px]'></div>)}
                 </div>
                 <BiMessageAltDetail className='text-[white] w-[25px] h-[25px]' onClick={()=>navigate("/messages")}/>
               </div>

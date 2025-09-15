@@ -24,6 +24,7 @@ import { setOnlineUsers, setSocket } from './redux/socketSlice.js'
 import getFollowingList from './hooks/getFollowingList.jsx'
 import getPrevChatUsers from './hooks/getPrevChatUsers.jsx'
 import Search from './pages/Search.jsx'
+import getAllNotifications from './hooks/getAllNotifications.jsx'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
   getAllDailiez()
   getFollowingList()
   getPrevChatUsers()
+  getAllNotifications()
 
 
 

@@ -25,7 +25,7 @@ const {postData}=useSelector(state=>state.post)
         }
     }
     fetchPost()
-  },[dispatch, userData])
+  },[dispatch, userData,postData])
 }
 
 export default getAllPost

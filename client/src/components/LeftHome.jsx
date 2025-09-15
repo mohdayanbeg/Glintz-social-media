@@ -14,26 +14,28 @@ const LeftHome = () => {
 
   const [profilePic, setProfilePic] = useState(dp)
 
-  const { userData,suggestedUsers } = useSelector(state => state.user)
+  const { userData, suggestedUsers } = useSelector(state => state.user)
 
+  const { notificationData } = useSelector(state => state.user)
   const dispatch = useDispatch()
-  
-  const handleLogout= async ()=>{
-      try {
-        const result=axios.get(`${serverUri}/api/auth/signout`,{withCredentials:true})
-        dispatch(setUserData(null))
-      } catch (error) {
-        console.log(error);
-        
-      }
+
+  const handleLogout = async () => {
+    try {
+      const result = axios.get(`${serverUri}/api/auth/signout`, { withCredentials: true })
+      dispatch(setUserData(null))
+    } catch (error) {
+      console.log(error);
+
+    }
   }
 
   return (
     <div className="w-[25%] hidden lg:block min-h-[100vh] bg-black border-r-2 border-gray-900">
       <div className="w-full h-[100px] flex items-center justify-between p-[20px]">
         <img src={logo} alt="" className='w-[100px]' />
-        <div className="">
-          <FaRegHeart className='w-[25px] h-[25px]' />
+        <div className='relative z-[100]' onClick={() => setShowNotification(prev => !prev)}>
+          <FaRegHeart className='text-[white] w-[25px] h-[25px]' />
+          {notificationData?.length > 0 && notificationData.some((noti) => noti.isRead === false) && (<div className='w-[10px] h-[10px] bg-blue-600 rounded-full absolute top-0 right-[-5px]'></div>)}
         </div>
       </div>
 
@@ -54,16 +56,16 @@ const LeftHome = () => {
 
       </div>
 
-    
 
-    <div className='w-full flex flex-col gap-[20px] p-[20px]'>
-      <h1 className="text-[white] text-[19px]">Suggested Users</h1>
-      <div className="">
-       {suggestedUsers && suggestedUsers.slice(0,10).map((user,index)=>(
-        <OtherUser key={index} user={user}/>
-    ))}
+
+      <div className='w-full flex flex-col gap-[20px] p-[20px]'>
+        <h1 className="text-[white] text-[19px]">Suggested Users</h1>
+        <div className="">
+          {suggestedUsers && suggestedUsers.slice(0, 10).map((user, index) => (
+            <OtherUser key={index} user={user} />
+          ))}
+        </div>
       </div>
-    </div>
 
 
     </div>

@@ -49,14 +49,18 @@ const DailiezDp = ({ ProfileImage, userName, dailiez }) => {
 }
 
 
-  const handleClick=()=>{
+  const handleClick= async ()=>{
   if(dailiez=='' && userName=="Your Dailiez"){
     navigate("/upload")
   }else if(dailiez!='' && userName=="Your Dailiez"){  
-      handleViewers(dailiez[0]._id)
-      // console.log(dailiez)
-      
-    navigate(`/dailiez/${userData?.userName}`)
+      if (dailiez[0] && dailiez[0]._id) {
+            await handleViewers(dailiez[0]._id);
+            navigate(`/dailiez/${userData?.userName}`);
+        } else {
+            console.error("Dailiez ID is not available.");
+            // Optionally, handle this case by navigating or showing an error message
+            navigate(`/dailiez/${userData?.userName}`);
+        }
  
   }else {
     console.log(dailiez._id);

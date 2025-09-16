@@ -12,7 +12,7 @@ userRouter.get("/follow/:targetUserId", loginSession, follow)
 userRouter.get("/followingList", loginSession, followingList)
 userRouter.get("/search", loginSession, search)
 userRouter.get("/getAllNotifications", loginSession, getAllNotifications)
-userRouter.get("/markedAsRead", loginSession, markAsRead)
+userRouter.post("/markAsRead", loginSession, markAsRead)
 userRouter.post("/editprofile", loginSession, upload.single("profileImage"), editProfile)
 
 export default userRouter 

@@ -12,7 +12,7 @@ import Profile from './pages/Profile'
 import EditProfile from './pages/editProfile'
 import Upload from './pages/Upload'
 import getAllPost from './hooks/getAllPost'
-import { setUserData } from './redux/userSlice'
+import { setNotificationData, setUserData } from './redux/userSlice'
 import Bitz from './pages/Bitz'
 import getAllBitz from './hooks/getAllBitz'
 import Dailiez from './pages/Dailiez'
@@ -25,6 +25,7 @@ import getFollowingList from './hooks/getFollowingList.jsx'
 import getPrevChatUsers from './hooks/getPrevChatUsers.jsx'
 import Search from './pages/Search.jsx'
 import getAllNotifications from './hooks/getAllNotifications.jsx'
+import Notifications from './pages/Notification.jsx'
 export const serverUri = "http://localhost:8000"
 
 const App = () => {
@@ -40,7 +41,7 @@ const App = () => {
 
 
 
-  const { userData, profileData } = useSelector(state => state.user)
+  const { userData, profileData, notificationData } = useSelector(state => state.user)
 
 
   const { socket } = useSelector(state => state.socket)
@@ -71,9 +72,9 @@ const App = () => {
   }, [userData])
 
 
-  // socket?.on("newNotification",(noti)=>{
-  //   dispatch(setNotificationData([...notificationData,noti]))
-  // })
+  socket?.on("newNotification",(noti)=>{
+    dispatch(setNotificationData([...notificationData,noti]))
+  })
 
 
   return (
@@ -89,6 +90,7 @@ const App = () => {
       <Route path='/messageArea' element={userData ? <MessageArea /> : <Navigate to={"/signin"} />} />
       <Route path='/upload' element={userData ? <Upload /> : <Navigate to={"/signin"} />} />
        <Route path='/search' element={userData?<Search/>:<Navigate to={"/signin"}/>}/>
+       <Route path='/notifications' element={userData?<Notifications/>:<Navigate to={"/signin"}/>}/>
       <Route path='/bitz' element={userData ? <Bitz /> : <Navigate to={"/signin"} />} />
     </Routes>
   )

@@ -12,7 +12,7 @@ export const uploadBitz=async (req,res)=>{
         const { caption} = req.body
         let media;
         if (req.file) {
-            media = await uploadOnCloudinary(req.file.path)
+           media = await uploadOnCloudinary(req.file.buffer, req.file.mimetype);
         } else {
             return res.status(400).json({ message: "media is required" })
         }

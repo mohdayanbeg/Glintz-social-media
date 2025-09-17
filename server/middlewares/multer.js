@@ -1,5 +1,5 @@
 import multer from "multer"
-const storage=multer.diskStorage({
+const storage=multer.memoryStorage({
  destination:(req,file,cb)=>{
     cb(null,"./public")
  },

@@ -26,7 +26,7 @@ import getPrevChatUsers from './hooks/getPrevChatUsers.jsx'
 import Search from './pages/Search.jsx'
 import getAllNotifications from './hooks/getAllNotifications.jsx'
 import Notifications from './pages/Notification.jsx'
-export const serverUri = "http://localhost:8000"
+export const serverUri = "https://glintz-server-nuxg.onrender.com"
 
 const App = () => {
 

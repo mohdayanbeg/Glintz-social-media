@@ -2,7 +2,7 @@ import React from 'react'
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import BitzCard from '../components/BItzCard';
+import BitzCard from '../components/BitzCard';
 // import BitzCard from '../components/BItzCard';
 
 const Bitz = () => {

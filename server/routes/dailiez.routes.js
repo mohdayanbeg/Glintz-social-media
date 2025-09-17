@@ -11,7 +11,7 @@ const dailiezRouter=express.Router()
 dailiezRouter.post("/upload",loginSession,upload.single("media"),uploadDailiez)
 dailiezRouter.get("/getByUserName/:userName",loginSession,getDailiezByUserName)
 dailiezRouter.get("/getAll",loginSession,getAllDailiez)
-dailiezRouter.get("/view/:storyId",loginSession,viewDailiez)
+dailiezRouter.get("/view/:dailiezId",loginSession,viewDailiez)
 
 
 export default dailiezRouter

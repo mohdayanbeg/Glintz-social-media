@@ -15,6 +15,9 @@ const Message = () => {
     const { onlineUsers } = useSelector(state => state.socket)
     const { prevChatUsers, selectedUsers } = useSelector(state => state.message)
     const dispatch = useDispatch()
+    const hasOnlineUsers = onlineUsers?.filter(id => id !== userData._id).length > 0;
+    console.log(hasOnlineUsers);
+    
 
 
 
@@ -28,12 +31,15 @@ const Message = () => {
             </div>
 
 
-            <div className='w-full h-[80px] flex gap-[20px] justify-start items-center overflow-x-auto p-[20px] border-b-2 border-gray-800'>
+            
+        
+            {hasOnlineUsers ? (<div className='w-full h-[80px] flex gap-[20px] justify-start items-center overflow-x-auto p-[20px] border-b-2 border-gray-800'>
                 {userData.following?.map((user, index) => (
-
                     (onlineUsers?.includes(user._id)) && <OnlineUser user={user} />
                 ))}
-            </div>
+            </div>): (<div className='w-full h-[40px] flex gap-[20px] justify-start items-center overflow-x-auto p-[10px] border-b-2 border-gray-800'>
+                <h2>No one is online</h2>
+            </div>)}
 
 
 

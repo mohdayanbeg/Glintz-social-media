@@ -12,7 +12,7 @@ export const sendMessage=async (req,res)=>{
 
         let image;
         if(req.file){
-            image=await uploadOnCloudinary(req.file.path)
+            image = await uploadOnCloudinary(req.file.buffer, req.file.mimetype);
         }
 
         const newMessage=await Message.create({

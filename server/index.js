@@ -15,6 +15,8 @@ dotenv.config()
 
 let port = process.env.PORT||5000
 
+app.set('trust proxy', 1);
+
 app.use(cors({
     origin:"https://glintz.onrender.com",
     credentials:true

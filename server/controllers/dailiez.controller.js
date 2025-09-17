@@ -14,7 +14,7 @@ export const uploadDailiez = async (req,res) => {
         const { mediaType } = req.body
         let media;
         if (req.file) {
-            media = await uploadOnCloudinary(req.file.path)
+            media = await uploadOnCloudinary(req.file.buffer, req.file.mimetype)
         } else { return res.status(400).json({ messgae: "media is required" }) }
         const dailiez = await Dailiez.create({
             author: req.userId, mediaType, media

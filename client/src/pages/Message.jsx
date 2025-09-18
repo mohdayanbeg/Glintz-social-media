@@ -16,7 +16,6 @@ const Message = () => {
     const { prevChatUsers, selectedUsers } = useSelector(state => state.message)
     const dispatch = useDispatch()
     const hasOnlineUsers = onlineUsers?.filter(id => id !== userData._id).length > 0;
-    console.log(hasOnlineUsers);
     
 
 

@@ -67,7 +67,12 @@ export const signIn=async(req,res)=>{
 
 export const signOut=async(req,res)=>{
     try {
-        res.clearCookie("token")
+        res.clearCookie("token",{
+            httpOnly:true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite:'none',
+            domain:'glintz.onrender.com'
+        })
         return  res.send("logout successfully")
     } catch (error) {
         return res.send(error)

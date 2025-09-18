@@ -39,6 +39,7 @@ const Profile = () => {
         try {
             const result = axios.get(`${serverUri}/api/auth/signout`, { withCredentials: true })
             dispatch(setUserData(null))
+            console.log('logout')
         } catch (error) {
             console.log(error);
 
@@ -51,7 +52,7 @@ const Profile = () => {
             <div className="w-full h-[80px] flex justify-between items-center px-[30px] text-white">
                 <div className="" onClick={() => { navigate("/") }}><MdOutlineKeyboardBackspace className='text-white cursor-pointer w-[25px]  h-[25px]' /></div>
                 <div className="font-semibold text-[20px]">{profileData?.userName}</div>
-                <div className="font-semibold cursor-pointer text-[20px] text-blue-500" onClick={() => { handleLogout() }}>Log Out</div>
+                <div className="font-semibold cursor-pointer text-[20px] text-blue-500" onClick={() => { handleLogout}}>Log Out</div>
             </div>
 
 

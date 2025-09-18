@@ -58,7 +58,6 @@ const App = () => {
 
       socketIo.on('getOnlineUsers', (users) => {
         dispatch(setOnlineUsers(users))
-        console.log(users)
       })
 
 

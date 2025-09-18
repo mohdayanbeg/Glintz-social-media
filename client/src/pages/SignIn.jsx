@@ -29,8 +29,6 @@ const SignIn = () => {
         try {
             e.preventDefault()
             const result=await axios.post(`${serverUri}/api/auth/signin`,{userName,password},{withCredentials:true})
-            console.log(result.data);
-            
             dispatch(setUserData(result.data))
             setLoading(false)
             

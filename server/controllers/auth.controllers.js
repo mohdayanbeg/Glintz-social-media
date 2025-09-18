@@ -34,7 +34,8 @@ export const signUp= async (req,res)=>{
             httpOnly:true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'none',
-            maxAge:30*24*60*60*1000
+            maxAge:30*24*60*60*1000,
+            path: '/'
         })
         return res.status(201).send(user)
     } catch (error) {
@@ -56,7 +57,8 @@ export const signIn=async(req,res)=>{
             httpOnly:true,
             secure: process.env.NODE_ENV === 'production',
             sameSite:'none',
-            maxAge:30*24*60*60*1000
+            maxAge:30*24*60*60*1000,
+            path: '/'
         })
         res.status(201).send(user)
     } catch (error) {
@@ -71,6 +73,7 @@ export const signOut=async(req,res)=>{
             httpOnly:true,
             secure: process.env.NODE_ENV === 'production',
             sameSite:'none',
+            path: '/'
         })
         return  res.send("logout successfully")
     } catch (error) {

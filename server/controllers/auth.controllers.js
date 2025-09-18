@@ -71,7 +71,6 @@ export const signOut=async(req,res)=>{
             httpOnly:true,
             secure: process.env.NODE_ENV === 'production',
             sameSite:'none',
-            domain:'https://glintz-server-nuxg.onrender.com'
         })
         return  res.send("logout successfully")
     } catch (error) {

@@ -39,7 +39,7 @@ const Profile = () => {
         try {
             const result = await axios.get(`${serverUri}/api/auth/signout`, { withCredentials: true })
             dispatch(setUserData(null))
-            console.log('logout')
+            navigate("/signin")
         } catch (error) {
             console.log(error);
 

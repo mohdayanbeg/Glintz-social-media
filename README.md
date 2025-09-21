@@ -1,4 +1,5 @@
 **My Social Media App** | Live:https://glintz.onrender.com/
+
 Welcome to a social media platform built from scratch, inspired by popular platforms like Instagram and Twitter. This project is a full-stack MERN application with a focus on real-time features and modern design. It's a great example of a portfolio-worthy project for any developer looking to showcase their skills.
 
 **✨ Features**

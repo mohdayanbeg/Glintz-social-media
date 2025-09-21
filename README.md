@@ -49,13 +49,13 @@ This project is built using the **MERN** stack, with key libraries to enable its
 
 2.  **Install backend dependencies:**
     ```bash
-    cd server # or your backend folder name
+    cd server
     npm install
     ```
 
 3.  **Install frontend dependencies:**
     ```bash
-    cd ../client # or your frontend folder name
+    cd ../client
     npm install
     ```
 

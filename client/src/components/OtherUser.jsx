@@ -15,7 +15,7 @@ function OtherUser({user}) {
       </div>
       <div className='w-fit'>
           <div className='text-[17px] text-white font-semibold text-sm truncate'>{user.userName}</div>
-          <div className='text-[15px] text-gray-400 font-semibold text-sm truncate'>{user.name}</div>
+          <div className='text-[15px] text-gray-400 font-semibold text-sm'>{user.name}</div>
       </div>
       </div>
       

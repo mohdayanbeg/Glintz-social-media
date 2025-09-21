@@ -1,4 +1,4 @@
-# My Social Media App 📱
+# My Social Media App 📱  ||  [Live](https://glintz.onrender.com/)
 
 Welcome to a full-stack social media platform built from scratch, inspired by popular platforms like Instagram and Twitter. This project is a comprehensive portfolio piece for any MERN stack developer, showcasing real-time features and a modern, responsive design.
 
@@ -13,6 +13,7 @@ Welcome to a full-stack social media platform built from scratch, inspired by po
 * **Secure Authentication:** 🔒 User sessions are managed with **JWT**.
 * **Responsive UI:** 📱 A clean and modern interface built with **Tailwind CSS**.
 * **File Uploads:** ☁️ All images and videos are securely uploaded to **Cloudinary**.
+* **Password Reset with OTP:** 🔑 Securely reset passwords using a one-time passcode sent via email.
 
 ---
 
@@ -26,6 +27,7 @@ This project is built using the **MERN** stack, with key libraries to enable its
 * **Real-time**: `Socket.IO`
 * **File Storage**: `Cloudinary`
 * **Styling**: `Tailwind CSS`
+* **Email Service**: `Nodemailer` for OTP functionality
 
 ---
 
@@ -59,14 +61,17 @@ This project is built using the **MERN** stack, with key libraries to enable its
 
 ### Configuration
 
-Create a `.env` file in your **backend** folder and add the following variables:
+Create a `.env` file in your **backend** folder and add the following variables, which reflect the names you're using in your project:
 
 ```env
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=a_very_strong_secret_key
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+EMAIL=your_email_address@example.com
+EMAIL_PASS=your_email_password
+JWT_SECRET_KEY=a_very_strong_secret_key
+MONGODB_URI=your_mongodb_connection_string
+NODE_ENV=development
 ```
 
 ### Running the App

@@ -25,6 +25,21 @@ app.use(express.json())
 app.use(cookieParser())
 
 
+const url = `https://render-hosting-se2b.onrender.com`;
+const interval = 30000;
+
+function reloadWebsite() {
+  axios.get(url).then((response) => {
+      console.log("website reloded");
+    })
+    .catch((error) => {
+      console.error(`Error : ${error.message}`);
+    });
+}
+
+setInterval(reloadWebsite, interval);
+
+
 
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)

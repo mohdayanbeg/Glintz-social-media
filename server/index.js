@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 
-const url = `https://render-hosting-se2b.onrender.com`;
+const url = `https://glintz.onrender.com/`;
 const interval = 30000;
 
 function reloadWebsite() {
